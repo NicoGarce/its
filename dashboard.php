@@ -46,6 +46,26 @@ $gti_local_url = 'http://192.168.89.251:8339/';
         }
     }
 
+// If cached state reports a component as down, do a quick live probe to avoid showing stale failures
+// (keeps fast cached path for normal operation but verifies 'Down' at page load).
+if ($gti_online['ok'] === false) {
+    $verify = checkHttpEndpoint($gti_online_url, 2);
+    if ($verify['ok'] === true) {
+        $gti_online = $verify;
+    } else {
+        $gti_online['http_code'] = $verify['http_code'] ?? $gti_online['http_code'];
+        $gti_online['time_ms'] = $verify['time_ms'] ?? $gti_online['time_ms'];
+    }
+}
+if ($gti_local['ok'] === false) {
+    $verify = checkHttpEndpoint($gti_local_url, 2);
+    if ($verify['ok'] === true) {
+        $gti_local = $verify;
+    } else {
+        $gti_local['http_code'] = $verify['http_code'] ?? $gti_local['http_code'];
+        $gti_local['time_ms'] = $verify['time_ms'] ?? $gti_local['time_ms'];
+    }
+}
 // If no cached data, fall back to live probes (may be slow)
 if ($gti_online['ok'] === null || $gti_local['ok'] === null) {
     $gti_online = checkHttpEndpoint($gti_online_url, 3);
