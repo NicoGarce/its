@@ -1,0 +1,1387 @@
+/* assets/css/style.css - Main stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --primary-bg: #292929;
+    --secondary-bg: #1a1a1a;
+    --accent-color: #1c4da1; /* brand dark blue */
+    --accent-bright: #7fa5f0; /* brighter blue for active state */
+    --accent-hover: #527bbd; /* brand lighter blue */
+    --accent-yellow: #ffc63e; /* brand accent yellow */
+    --text-color: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #333333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --sidebar-width: 210px; /* slightly narrower by default */
+    --sidebar-collapsed: 56px; /* compact width when collapsed */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Login Styles */
+.login-body {
+    /* background image with lighter overlay for better visibility */
+    background-image: linear-gradient(rgba(2,6,23,0.24), rgba(2,6,23,0.24)), url('../img/BG2.png');
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    /* subtle translucent frosted panel: slightly see-through with blur */
+    background: linear-gradient(180deg, rgba(2,6,23,0.82), rgba(2,6,23,0.78));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.28);
+    padding: 28px 28px;
+    color: var(--text-color);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.brand-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.brand-text .login-title {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+    margin: 0;
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.login-form .form-group { margin-bottom: 14px; }
+
+.login-input {
+    /* softer semi-transparent inputs to match the frosted panel */
+    background-color: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-color);
+    caret-color: var(--accent-color);
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.login-input::placeholder { color: rgba(255,255,255,0.5); }
+
+.login-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 18px rgba(28,77,161,0.06);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.login-btn {
+    width: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+    border: none;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-weight: 700;
+    color: var(--text-color);
+    box-shadow: 0 8px 24px rgba(0,212,255,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.login-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,212,255,0.16); }
+
+.error-message { color: #ff6b6b; text-align: center; margin-top: 12px; font-size: 14px; }
+
+.login-foot { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.35); text-align: center; }
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: var(--secondary-bg);
+    border-right: 1px solid var(--border-color);
+    transition: width 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed);
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+    color: var(--accent-color);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-header h3 {
+    opacity: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.sidebar-menu li {
+    position: relative;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Slightly smaller font sizes to fit narrower sidebar */
+.sidebar { font-size: 14px; }
+.sidebar-link { padding: 10px 16px; }
+.sidebar-link .label { font-size: 13px; }
+.brand-name { font-size: 14px; }
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background: rgba(28,77,161,0.08);
+    color: var(--text-color);
+    border-left: 3px solid var(--accent-color);
+}
+
+.sidebar-link i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.sidebar.collapsed .sidebar-link .label {
+    display: none;
+}
+
+.sidebar.collapsed .brand-name { display: none; }
+
+.sidebar-link { color: var(--text-secondary); }
+.sidebar-link .icon svg { width: 20px; height: 20px; display: block; }
+.sidebar-link .icon svg path, .sidebar-link .icon svg rect { stroke: currentColor; }
+
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar.collapsed .sidebar-link { justify-content: center; padding: 10px 8px; }
+
+/* Hide submenu indicator when collapsed (keep icons only) */
+.sidebar.collapsed .submenu-icon { display: none; }
+
+/* Submenu: no hover-to-expand, visibility controlled by .has-submenu.open */
+.sidebar-toggle-btn {
+    /* match logout link baseline and hover behavior */
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 20px;
+    color: rgba(255,255,255,0.75);
+    background: transparent;
+    border: none;
+    width:100%;
+    text-align:left;
+    border-radius:8px;
+    cursor:pointer;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+.sidebar-toggle-btn:hover {
+    /* same hover appearance as other sidebar links: white text/icon with subtle tint */
+    background: rgba(28,77,161,0.10);
+    color: var(--text-color);
+}
+
+/* ensure logout hover matches other links (white text/icon) */
+.logout-link:hover {
+    background: rgba(28,77,161,0.10);
+    color: var(--text-color);
+}
+
+/* Ensure the SVG icon in the button inherits current color like the anchors */
+.sidebar-toggle-btn svg { width: 20px; height: 20px; display:block; }
+.sidebar-toggle-btn svg path, .sidebar-toggle-btn svg rect { stroke: currentColor; }
+.sidebar-toggle-btn .toggle-label { font-size:13px; color:inherit; display:inline-block }
+.sidebar.collapsed .sidebar-toggle-btn .toggle-label { display:none }
+/* When sidebar is collapsed, center the toggle icon and reduce padding so it stays visible */
+.sidebar.collapsed .sidebar-toggle-btn { justify-content:center; padding:10px 8px; text-align:center; }
+.sidebar.collapsed .sidebar-toggle-btn svg { display:block; margin:0; }
+.has-submenu.open .submenu { max-height: 240px; }
+
+.submenu {
+    list-style: none;
+    background: rgba(0, 0, 0, 0.2);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.submenu.show {
+    max-height: 200px;
+}
+
+.submenu li a {
+    padding: 8px 40px;
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.submenu li a:hover {
+    color: var(--accent-color);
+}
+
+.submenu-icon {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.has-submenu.open .submenu-icon {
+    transform: rotate(180deg);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Redesigned Sidebar */
+.sidebar-top {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: var(--text-color);
+    font-weight: 800;
+}
+/* Ensure any <img> inside brand-mark is centered and scales nicely */
+.brand-mark img { display:block; width:40px; height:40px; object-fit:contain; border-radius:8px; margin:0; }
+
+/* When the sidebar is collapsed, center the brand mark and hide the brand name */
+.sidebar.collapsed .brand { justify-content: center; }
+.sidebar.collapsed .brand-mark { margin: 10px auto; }
+.sidebar.collapsed .brand-name { display: none; }
+.brand-name { color: var(--text-color); font-weight: 700; }
+
+/* Ensure the brand/logo is centered when the sidebar is collapsed */
+.sidebar.collapsed .sidebar-top { justify-content: center; }
+.sidebar.collapsed .sidebar-top .brand { justify-content: center; width: 100%; }
+.sidebar.collapsed .brand-mark { margin: 6px auto !important; display:block; }
+.sidebar.collapsed .brand-mark img { margin: 0 auto !important; display:block; }
+
+.sidebar-nav { padding: 12px 0; }
+.sidebar-menu { padding: 10px 0; }
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+.sidebar-link .icon { width: 22px; display: inline-block; text-align:center; }
+.sidebar-link .label { white-space: nowrap; }
+.sidebar-link:hover {
+    /* subtle accent-tinted hover that reads on the dark background */
+    background: rgba(28,77,161,0.10);
+    color: var(--text-color);
+}
+
+.sidebar-link.active {
+    /* stronger active state with left accent border and brighter accent text */
+    background: linear-gradient(90deg, rgba(28,77,161,0.12), rgba(28,77,161,0.06));
+    color: var(--accent-bright);
+    font-weight: 700;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 16px; /* account for the border */
+}
+
+/* keep active color when hovered */
+.sidebar-link.active:hover {
+    color: var(--text-primary);
+}
+
+.sidebar-footer { position: absolute; bottom: 20px; width: 100%; padding: 0 20px; }
+.logout-link { display: flex; align-items:center; gap:12px; color: var(--text-secondary); text-decoration: none; padding: 10px 20px; border-radius:8px; transition: background 0.18s ease, color 0.18s ease; }
+
+/* Unified hover/active for sidebar items: links, logout and collapse button */
+.sidebar-link:hover,
+.logout-link:hover,
+.sidebar-toggle-btn:hover {
+    background: rgba(28,77,161,0.10);
+    color: var(--text-color);
+    border-left: 3px solid var(--accent-color);
+    padding-left: 16px; /* account for border so layout doesn't shift */
+}
+
+/* Active state uses accent and left border for links only */
+.sidebar-link.active {
+    background: linear-gradient(90deg, rgba(28,77,161,0.12), rgba(28,77,161,0.06));
+    color: var(--accent-bright);
+    font-weight: 700;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 16px; /* account for the border */
+}
+
+/* Ensure SVG icons inherit current color across all sidebar controls */
+.sidebar-link .icon svg,
+.sidebar-toggle-btn svg,
+.logout-link svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+/* Notification overlay (global) */
+.notif-overlay{position:fixed;right:18px;bottom:18px;z-index:1200;min-width:300px;max-width:420px;border-radius:10px;padding:14px 16px;background:linear-gradient(180deg, rgba(2,16,24,0.98), rgba(2,16,24,0.92));color:#fff;box-shadow:0 12px 32px rgba(2,16,24,0.28);display:flex;gap:12px;align-items:center}
+.notif-overlay .n-title{font-weight:700;font-size:15px}
+.notif-overlay .n-body{font-size:13px;color:rgba(255,255,255,0.9)}
+.notif-overlay .n-actions{margin-left:auto;display:flex;gap:8px}
+.notif-hidden{display:none!important}
+
+.sidebar-link .icon svg path, .sidebar-link .icon svg rect,
+.sidebar-toggle-btn svg path, .sidebar-toggle-btn svg rect,
+.logout-link svg path, .logout-link svg rect {
+    stroke: currentColor;
+    fill: none;
+}
+
+/* When collapsed reduce footer padding so icons remain visible */
+.sidebar.collapsed .sidebar-footer { padding: 0 6px; }
+.sidebar.collapsed .sidebar-footer .logout-link { justify-content:center; }
+.sidebar.collapsed .sidebar-footer .sidebar-toggle-btn { justify-content:center; padding:8px 0; }
+
+/* Page header */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.page-header .page-title { margin:0; font-size: 20px; color: var(--accent-color); }
+.page-header .page-actions { display:flex; gap:8px; align-items:center; }
+
+@media (max-width: 768px) {
+    .sidebar { width: var(--sidebar-width); }
+    .main-content { margin-left: 0; }
+    .brand-name { display: none; }
+    .sidebar-link .label { display: none; }
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-left: var(--sidebar-collapsed);
+}
+
+.page-title {
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.metric-card, .inventory-card, .chat-card, .reservation-card {
+    margin-bottom: 20px;
+}
+
+/* Tables */
+.table {
+    color: var(--text-color);
+}
+
+.table-dark {
+    background-color: var(--secondary-bg);
+}
+
+.table-dark th {
+    background-color: var(--primary-bg);
+    border-color: var(--border-color);
+    color: var(--accent-color);
+}
+
+.table-dark td {
+    border-color: var(--border-color);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(28, 77, 161, 0.05);
+}
+
+/* Tech chat specific fixes: ensure readable text on dark theme */
+.tech-wrapper, .tech-wrapper * {
+    color: var(--text-color) !important;
+}
+
+.tech-wrapper .session-item { background: transparent; }
+.tech-wrapper .session-item .meta { color: var(--text-secondary) !important; font-size: 13px; }
+
+/* Make badges visible on dark background */
+.tech-wrapper .session-item .badge {
+    background: rgba(28,77,161,0.12) !important;
+    color: var(--text-color) !important;
+}
+
+/* Conversation header and composer */
+.conversation-header h4, .conversation-header .meta { color: var(--text-color) !important; }
+.conversation-composer .btn, .conversation-composer .btn-accent { color: var(--text-color) !important; }
+
+/* Message timestamps/meta */
+.conversation-messages .meta { color: var(--text-secondary) !important; font-size: 12px; margin-bottom: 8px; }
+
+/* Session list items ensure contrast for title and subtitle */
+.session-list .session-item div:nth-child(1) { color: var(--text-color) !important; }
+
+/* Ensure inputs inside tech chat are readable */
+.tech-sidebar .form-control, .conversation-composer .form-control { background: rgba(2,6,23,0.55) !important; color: var(--text-color) !important; }
+
+
+/* Buttons */
+.btn-accent {
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(28, 77, 161, 0.3);
+}
+
+/* (Hover-to-open dropdowns removed — keep default Bootstrap behavior) */
+
+/* Forms */
+.form-control {
+    background-color: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(28, 77, 161, 0.25);
+}
+
+/* Search Input */
+.search-input {
+    max-width: 300px;
+}
+
+/* Chat Styles */
+.chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: var(--primary-bg);
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.message.sent {
+    background: var(--accent-color);
+    color: var(--text-color) !important; /* ensure readable on dark accent */
+    margin-left: auto;
+}
+
+.message.received {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Ensure bubble text is always readable */
+.conversation-messages .message,
+#messages .message,
+.chat-messages .message,
+.conversation-messages .message .message-text,
+.message .message-text {
+    color: var(--text-color) !important;
+}
+
+/* Sent messages use dark text for contrast on accent background */
+.conversation-messages .message.sent,
+#messages .message.user,
+.chat-messages .message.sent {
+    color: #021018 !important;
+}
+
+/* Reply/input text visibility */
+.conversation-composer .form-control,
+.chat-input .form-control,
+textarea#messageInput,
+input#replyInput {
+    color: var(--text-color) !important;
+    background-color: rgba(2,6,23,0.6) !important;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+/* Technician chat redesign */
+.tech-sidebar { background: var(--secondary-bg); border: 1px solid rgba(255,255,255,0.03); border-radius:10px; box-shadow: var(--shadow); }
+.tech-sidebar .session-list { padding: 8px; }
+.session-item { display:flex; gap:12px; align-items:center; padding:10px; border-radius:8px; cursor:pointer; }
+.session-item:hover { background: rgba(255,255,255,0.02); }
+.session-item .avatar { width:40px; height:40px; border-radius:8px; display:grid; place-items:center; background: rgba(255,255,255,0.04); color:var(--text-color); font-weight:700; }
+.session-item .meta { font-size:12px; color: rgba(255,255,255,0.65); }
+.session-item .title { font-weight:600; color: var(--text-color); }
+.session-item.active { background: linear-gradient(90deg, rgba(28,77,161,0.06), rgba(28,77,161,0.02)); border-left: 3px solid var(--accent-color); }
+
+.conversation-panel { border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.03); box-shadow: var(--shadow); }
+.conversation-header { border-bottom: 1px solid rgba(255,255,255,0.03); }
+.conversation-messages { background: transparent; }
+.message.sent { background: var(--accent-color); color: var(--text-color) !important; margin-left:auto; padding:10px 12px; border-radius:10px; max-width:80%; margin-bottom:8px; }
+.message.received { background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); padding:10px 12px; border-radius:10px; max-width:80%; margin-bottom:8px; }
+.conversation-composer { background: transparent; }
+
+/* Chat timestamps and metadata: smaller and lighter for readability */
+.conversation-panel .meta,
+#convMessages .meta,
+#chatMessages .meta,
+.session-item .meta {
+    font-size: 11px !important;
+    color: rgba(255,255,255,0.6) !important;
+    margin-top: 4px;
+}
+
+/* small screens: stack */
+@media (max-width: 768px) {
+    /* Show the tech sessions sidebar above conversation on small screens (stacked layout)
+       and make it compact so the session selector remains usable on mobile. */
+    .tech-sidebar { display:block; width:100%; margin-bottom:12px; max-height:none; overflow:visible; }
+    .conversation-panel { border-radius:8px; }
+}
+
+/* Tablet / small-desktop: place tech sidebar and conversation side-by-side without overlap */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .tech-wrapper { display: flex; gap: 16px; align-items: flex-start; }
+    .tech-sidebar { flex: 0 0 220px; max-width: 260px; width: 220px; margin-bottom: 0; }
+    .conversation-panel { flex: 1 1 auto; min-width: 0; }
+    /* ensure session list content is left-aligned */
+    .tech-sidebar .session-list { display:flex; flex-direction:column; align-items:flex-start; }
+    .session-item { width: 100%; }
+}
+
+/* Ensure conversation-panel doesn't overlap when viewport is narrow: allow it to wrap under sidebar */
+@media (max-width: 1024px) {
+    .conversation-panel { clear: both; }
+}
+
+/* Wider breakpoint: stable side-by-side layout for desktops and prevent overlap */
+@media (min-width: 1101px) {
+    .tech-wrapper { display: flex; gap: 24px; align-items: flex-start; }
+    .tech-sidebar { flex: 0 0 240px; max-width: 280px; width: 240px; }
+    .conversation-panel { flex: 1 1 auto; min-width: 0; position: relative; z-index: 1; }
+}
+
+/* Desktop: force Bootstrap columns inside tech-wrapper to behave as fixed sidebar + fluid content */
+@media (min-width: 992px) {
+    .tech-wrapper .row { display: flex; gap: 24px; align-items: flex-start; }
+    .tech-wrapper .row > .col-md-4 { flex: 0 0 280px; max-width: 280px; }
+    .tech-wrapper .row > .col-md-8 { flex: 1 1 0; min-width: 0; }
+    .tech-sidebar { position: relative; z-index: 3; }
+    .conversation-panel { position: relative; z-index: 1; overflow: hidden; }
+    /* ensure the session-list uses full height within its column and doesn't push the conversation */
+    .tech-sidebar .session-list { max-height: 640px; overflow: auto; }
+}
+
+/* Remove large gutters inside the tech-wrapper so panels use available width */
+.tech-wrapper .row { margin-left: 0; margin-right: 0; }
+.tech-wrapper .row > [class*="col-"] { padding-left: 8px; padding-right: 8px; }
+.tech-wrapper .row { flex-wrap: wrap; }
+.tech-wrapper .row > .col-md-8 .conversation-panel { width: 100% !important; max-width: none !important; }
+.tech-wrapper .row > .col-md-4 .tech-sidebar { width: 100% !important; max-width: none !important; }
+
+/* Ensure cards inside columns stretch to fill column width */
+.tech-wrapper .card { width: 100%; max-width: none; }
+
+/* Center tech-sidebar content on small screens and avoid left-offsets */
+@media (max-width: 768px) {
+    .tech-sidebar { width: 100%; padding-left: 0; padding-right: 0; }
+    .tech-sidebar .session-list { max-width: 560px; margin: 0 auto; display:block; }
+    .tech-sidebar .session-list .session-item { margin-left: 0; margin-right: 0; }
+    .conversation-panel { margin-top: 12px; position: relative; z-index: 0; }
+}
+
+/* Calendar */
+#calendar {
+    background: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-collapsed);
+    }
+    .main-content {
+        margin-left: var(--sidebar-collapsed);
+    }
+    .sidebar.collapsed .sidebar-link .label {
+        display: none;
+    }
+}
+
+/* Mobile sidebar overlay behavior */
+@media (max-width: 768px) {
+    .main-content { margin-left: 0 !important; }
+    .sidebar { transform: translateX(-100%); transition: transform 0.22s ease; z-index: 1200; width: var(--sidebar-width); }
+    .sidebar.mobile-open { transform: translateX(0); }
+    .sidebar.mobile-hidden { transform: translateX(-100%); }
+    /* position mobile open button out of the way (bottom-left) to avoid covering header controls */
+    .mobile-sidebar-toggle { position: fixed; left: 12px; bottom: 20px; z-index: 1210; display: inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:8px; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+    .mobile-sidebar-close { display: inline-flex !important; }
+}
+
+/* Backdrop for mobile sidebar */
+.sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.42); z-index: 1195; opacity: 0; transition: opacity 0.22s ease; }
+.sidebar-backdrop.visible { opacity: 1; }
+.sidebar-backdrop.d-none { display: none; }
+
+/* Body lock when mobile sidebar is open */
+body.no-scroll { height: 100vh; overflow: hidden; }
+
+/* stronger shadow when the sidebar overlays content on mobile to hide gap */
+.sidebar.mobile-open { box-shadow: 6px 0 30px rgba(0,0,0,0.6); border-right: none; }
+
+/* hide the collapse control (footer) while mobile sidebar is open to avoid duplicate toggles */
+.sidebar.mobile-open .sidebar-footer .sidebar-toggle-btn { display: none !important; }
+.sidebar.mobile-open .sidebar-footer .logout-link { padding-left: 16px; }
+
+/* Make sidebar more compact on small screens */
+@media (max-width: 576px) {
+    :root { --sidebar-collapsed: 48px; }
+    .sidebar { width: var(--sidebar-width); }
+    .sidebar .label { display: none; }
+    .sidebar .icon { margin: 0 auto; }
+}
+
+/* When the mobile sidebar is opened, reveal labels and use a wider panel */
+@media (max-width: 768px) {
+    .sidebar { width: min(360px, 86vw); }
+    .sidebar.mobile-open { width: min(360px, 86vw); }
+    .sidebar.mobile-open .sidebar-link .label { display: inline-block !important; }
+    .sidebar.mobile-open .brand-name { display: inline-block !important; }
+    .sidebar.mobile-open .sidebar-top { padding-right: 14px; }
+}
+
+/* Mobile size adjustments: reduce font-sizes, paddings and card spacing */
+@media (max-width: 768px) {
+    html, body { font-size: 14px; }
+    .page-header .page-title, .page-title { font-size: 18px; }
+    .brand-name { font-size: 15px; }
+
+    /* Cards and content spacing */
+    .card { padding: 10px; border-radius: 8px; }
+    .card .card-title { font-size: 15px; margin-bottom: 8px; }
+    .metric-card, .inventory-card, .chat-card { margin-bottom: 14px; }
+
+    /* Tables: smaller text and tighter padding */
+    table.table, .table { font-size: 13px; }
+    .table th, .table td { padding: 8px 10px; }
+
+    /* Tech chat: tighter session items and smaller meta text */
+    .tech-sidebar, .conversation-panel, .conversation-composer { font-size: 14px; }
+    .session-item { padding: 8px; gap: 8px; }
+    .session-item .avatar { width:36px; height:36px; }
+    .session-item .meta { font-size: 11px !important; }
+
+    /* Sidebar labels slightly smaller on mobile */
+    .sidebar .sidebar-link .label { font-size: 14px; }
+
+    /* Buttons and form controls slightly smaller */
+    .btn, .btn-accent, .btn-accent:hover, .btn-outline-light { padding: 8px 12px; font-size: 13px; }
+    .form-control { font-size: 14px; padding: 8px; }
+}
+
+@media (max-width: 480px) {
+    html, body { font-size: 13px; }
+    .page-header .page-title, .page-title { font-size: 16px; }
+    .brand-name { font-size: 14px; }
+    .card { padding: 8px; }
+    table.table, .table { font-size: 12px; }
+    .sidebar .sidebar-link .label { font-size: 13px; }
+}
+
+/* Button size refinements for mobile: reduce padding, set min-height and smaller svg icons */
+@media (max-width: 768px) {
+    .btn, .btn-primary, .btn-outline-light, .btn-accent { padding: 6px 10px !important; font-size: 13px !important; border-radius: 6px !important; min-height: 36px; }
+    .sidebar .sidebar-footer .logout-link, .sidebar .sidebar-footer .sidebar-toggle-btn { padding: 8px 12px !important; }
+    .mobile-sidebar-toggle { width:40px; height:40px; }
+    .btn svg, .mobile-sidebar-toggle svg, .sidebar-toggle-btn svg { width:16px !important; height:16px !important; }
+    .card .btn { padding: 6px 10px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+    .btn, .btn-primary, .btn-outline-light, .btn-accent { padding: 6px 8px !important; font-size: 12px !important; min-height: 34px; }
+    .mobile-sidebar-toggle { width:38px; height:38px; left:10px; bottom:12px; }
+    .btn svg, .mobile-sidebar-toggle svg, .sidebar-toggle-btn svg { width:14px !important; height:14px !important; }
+}
+
+/* Mobile-specific visual refinements */
+@media (max-width: 768px) {
+    /* Tighter header inside the sidebar to avoid large empty area */
+    .sidebar .sidebar-top { padding: 10px 14px; align-items: center; }
+    .sidebar .brand { gap: 10px; }
+    .sidebar .brand-name { font-size: 16px; font-weight:600; }
+
+    /* Ensure icons align left when labels are visible */
+    .sidebar .sidebar-link { padding: 10px 16px; align-items: center; }
+    .sidebar .sidebar-link .icon { width: 36px; text-align: left; margin-right: 8px; }
+    .sidebar .sidebar-link .label { display: inline-block; }
+
+    /* Force left alignment and prevent accidental right-aligned layout */
+    .sidebar .sidebar-link { justify-content: flex-start !important; }
+    .sidebar .sidebar-link .label { text-align: left !important; margin-left: 6px; }
+    .sidebar .sidebar-nav, .sidebar-menu { direction: ltr !important; }
+
+    /* When mobile-open, use a two-column grid so icon+label remain left-aligned reliably */
+    .sidebar.mobile-open .sidebar-link { display: grid !important; grid-template-columns: 36px 1fr; align-items: center; gap: 8px; padding: 10px 16px !important; }
+    .sidebar.mobile-open .sidebar-link .icon { justify-self: start; width: 36px; }
+    .sidebar.mobile-open .sidebar-link .label { justify-self: start; text-align: left; margin-left: 0; }
+
+    /* Active item: full-width highlight rather than left border (looks cleaner on mobile) */
+    .sidebar .sidebar-link.active { border-left: none; padding-left: 12px; background: rgba(28,77,161,0.10); }
+
+    /* Position mobile close button inside the sidebar header */
+    #mobileSidebarClose { position: absolute; top: 8px; right: 8px; z-index: 1300; border-radius: 6px; }
+
+    /* Slightly dim the floating open toggle so it reads as a controller not content */
+    .mobile-sidebar-toggle { background: linear-gradient(180deg, rgba(28,77,161,0.98), rgba(28,77,161,0.9)); opacity: 0.98; }
+}
+
+/* Hide less important table columns on narrow viewports when marked with .hide-mobile */
+@media (max-width: 768px) {
+    .table thead th.hide-mobile, .table tbody td.hide-mobile { display: none !important; }
+}
+
+/* Inventory / documents: smaller buttons on very small screens */
+@media (max-width: 480px) {
+    .inventory-card .btn, .documents-card .btn { padding: 6px 8px; font-size: 13px; }
+    .inventory-card .form-control, .documents-card .form-control { font-size: 14px; }
+}
+
+/* Accessibility / contrast fixes for dark theme */
+/* Ensure muted/smaller text is readable on dark backgrounds */
+.text-muted, .small, .meta, .form-label {
+    color: rgba(255,255,255,0.65) !important;
+}
+
+/* Card titles and table text should be legible */
+.card .card-title, .page-title, table.table th, table.table td {
+    color: var(--text-color) !important;
+}
+
+/* Buttons: ensure outline/light variants show on dark background */
+.btn-outline-light {
+    color: var(--text-color) !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* Ensure links in cards and headers are visible */
+.card a, .page-header a { color: var(--accent-color) !important; }
+
+/* Inputs and placeholders */
+.form-control, .login-input { color: var(--text-color) !important; }
+.form-control::placeholder, .login-input::placeholder { color: rgba(255,255,255,0.45) !important; }
+
+/* Ensure inputs placed on dark cards (inventory, documents, modals) remain dark and readable
+   Add stronger rules to override browser/autofill/focus defaults which sometimes set white backgrounds. */
+.card .form-control,
+.card input.form-control,
+.card textarea.form-control,
+.inventory-card .form-control,
+.documents-card .form-control {
+    background-color: rgba(2,6,23,0.55) !important;
+    color: var(--text-color) !important;
+    caret-color: var(--accent-color) !important;
+    border: 1px solid rgba(255,255,255,0.04) !important;
+}
+.card .form-control:focus,
+.card input.form-control:focus,
+.card textarea.form-control:focus {
+    background-color: rgba(2,6,23,0.65) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(28,77,161,0.12) !important;
+    outline: none !important;
+}
+.card .form-control::placeholder { color: rgba(255,255,255,0.45) !important; }
+
+/* Autofill and browser override fixes: keep text visible when browser applies autofill */
+/* Stronger autofill and input background rules for login fields */
+input.login-input, textarea.login-input, .login-card .form-control {
+    background-color: rgba(2,6,23,0.75) !important;
+    color: var(--text-color) !important;
+    caret-color: var(--accent-color) !important;
+}
+
+input.login-input:-webkit-autofill,
+input.login-input:-webkit-autofill:focus,
+input.login-input:-webkit-autofill:hover,
+textarea.login-input:-webkit-autofill,
+textarea.login-input:-webkit-autofill:focus,
+textarea.login-input:-webkit-autofill:hover {
+    -webkit-text-fill-color: var(--text-color) !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(2,6,23,0.75) inset !important;
+    box-shadow: 0 0 0px 1000px rgba(2,6,23,0.75) inset !important;
+}
+
+/* Firefox autofill styling fallback */
+input:-moz-autofill, textarea:-moz-autofill {
+    box-shadow: 0 0 0px 1000px rgba(2,6,23,0.75) inset !important;
+    -moz-text-fill-color: var(--text-color) !important;
+}
+
+input:-internal-autofill-selected {
+    background-color: rgba(2,6,23,0.75) !important;
+}
+
+/* Chat specific */
+.chat-card, .chat-messages { color: var(--text-color) !important; }
+
+/* Reservation/calendar */
+.reservation-card, #calendar { color: var(--text-color) !important; }
+
+/* Pre-chat page specific styling (light theme) */
+.prechat-body {
+    /* Override color variables for a light theme inside this page */
+    --text-color: #0b1220;
+    --text-secondary: #55606c;
+    --primary-bg: #f4f6fb;
+    --secondary-bg: #ffffff;
+    --border-color: #e6eaf0;
+    --shadow: 0 8px 24px rgba(12,20,40,0.06);
+    --accent-color: #1c4da1;
+    --accent-hover: #527bbd;
+    --accent-yellow: #ffc63e;
+
+    background-color: var(--primary-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 12px;
+}
+
+.prechat-body .login-container { max-width: 980px; }
+.prechat-body .login-card {
+    /* light gradient card while keeping a subtle depth */
+    background: linear-gradient(180deg, #ffffff, #fbfdff 60%);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color);
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(12,20,40,0.06);
+    color: var(--text-color);
+    border-radius: 12px;
+}
+
+/* Ensure form controls and chat areas inside prechat use light backgrounds and dark text */
+.prechat-body .form-control,
+.prechat-body textarea,
+.prechat-body input,
+.prechat-body .chat-input .form-control,
+.prechat-body #messageInput,
+.prechat-body #replyInput {
+    background: #ffffff !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Stronger placeholder contrast for light-themed prechat */
+.prechat-body .form-control::placeholder,
+.prechat-body input::placeholder,
+.prechat-body textarea::placeholder {
+    color: rgba(11,18,32,0.45) !important;
+}
+
+/* Constrain Chart.js canvases used in dashboard cards so they don't grow
+   unexpectedly due to responsive sizing. These rules force a fixed
+   visual height while allowing the canvas to scale horizontally. */
+#chartGtiOnline, #chartGtiLocal {
+    height: 160px !important;
+    max-height: 220px !important;
+    width: 100% !important;
+    display: block;
+}
+
+/* Ensure card bodies that contain charts provide a predictable area */
+.metric-card .card-body {
+    min-height: 180px;
+}
+
+/* Responsive helpers for small viewports */
+@media (max-width: 991px) {
+    /* Reduce main content padding on tablets/phones */
+    .main-content { padding: 12px !important; }
+    .container-fluid { padding-left: 8px; padding-right: 8px; }
+    /* Cards should be more compact */
+    .card .card-body { padding: 12px !important; }
+    /* Allow button groups to wrap instead of overflowing */
+    .btn-group, .d-flex.gap-2 { flex-wrap: wrap !important; }
+    /* Make modal dialogs occupy more width on small screens */
+    .modal-dialog { max-width: 96% !important; margin: 0 auto; }
+    /* Improve table scroll on small screens */
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+@media (max-width: 575px) {
+    /* Further compact spacing on very small screens */
+    .page-header { gap: 8px; }
+    .page-header .page-title { font-size: 16px; }
+    .card .card-title { font-size: 15px; }
+    .card .card-body { padding: 10px !important; }
+    .metric-card .card-body { min-height: auto; }
+}
+
+/* Prefer max-height for chart containers to avoid growing beyond intended card height */
+#chartGtiOnline, #chartGtiLocal { max-height: 220px; }
+
+/* Checkbox and its label in prechat should be visible */
+.prechat-body input[type="checkbox"] {
+    accent-color: var(--accent-color);
+    width: 18px; height: 18px; vertical-align: middle;
+}
+.prechat-body label[for="privacyAccept"],
+.prechat-body .prechat-help,
+.prechat-body .contact-optional,
+.prechat-body .form-label,
+.prechat-body label,
+.prechat-body .login-title,
+.prechat-body .login-subtitle {
+    color: var(--text-color) !important;
+    font-size: 13px;
+}
+
+/* Messages area in prechat (after starting chat) should be light and readable */
+.prechat-body #messages,
+.prechat-body .conversation-messages,
+.prechat-body .chat-messages {
+    background: #fbfdff !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Message bubble styles for light theme */
+.prechat-body .message.user,
+.prechat-body .message.sent {
+    background: var(--accent-color) !important;
+    color: #ffffff !important;
+}
+.prechat-body .message.tech,
+.prechat-body .message.received {
+    background: #ffffff !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Ensure meta/timestamps are darker for readability */
+.prechat-body .meta,
+.prechat-body .session-item .meta,
+.prechat-body .conversation-panel .meta {
+    color: var(--text-secondary) !important;
+}
+
+
+.prechat-body .brand-mark {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(28,77,161,0.08);
+}
+
+.prechat-body .login-title { color: var(--text-secondary); }
+.prechat-body .login-subtitle { color: var(--text-secondary); }
+
+/* Make the pre-chat form inputs slightly larger for emphasis */
+.prechat-body .prechat-grid .form-control {
+    padding: 14px 16px;
+    font-size: 15px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    transition: box-shadow 0.18s ease, border-color 0.12s ease, transform 0.08s ease;
+}
+
+.prechat-body .prechat-grid .form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 18px rgba(28,77,161,0.12);
+    transform: translateY(-1px);
+}
+
+.prechat-body .prechat-grid .form-control::placeholder { color: var(--text-secondary); }
+
+/* Ensure submit button uses yellow accent on pre-chat for contrast */
+.prechat-body .login-btn { background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); color: #ffffff; border: none; box-shadow: 0 8px 20px rgba(28,77,161,0.12); }
+
+.prechat-body .login-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(28,77,161,0.14); }
+
+/* Make the user-side chat span full width while remaining responsive */
+.chat-panel.fullwidth {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 12px 16px;
+}
+.chat-panel.fullwidth .login-card {
+    width: 100%;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+/* Ensure chat panel card uses the same left accent as pre-chat (single blue stripe) */
+.chat-panel .login-card { border-left: 4px solid var(--accent-color); padding-left: 28px; }
+
+/* Messages area full width */
+.chat-panel.fullwidth #messages,
+.chat-panel.fullwidth .conversation-messages,
+.chat-panel.fullwidth .chat-messages {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    background: #fbfdff;
+}
+
+.chat-panel.fullwidth .message { max-width: 72%; }
+.chat-panel.fullwidth .message.sent { margin-left: auto; }
+
+/* Composer: textarea fills remaining width */
+.chat-panel.fullwidth .chat-input { display:flex; gap:10px; align-items:flex-end; }
+.chat-panel.fullwidth .chat-input textarea,
+.chat-panel.fullwidth .chat-input .form-control {
+    flex: 1 1 auto; min-width: 0; border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .chat-panel.fullwidth .message { max-width: 92%; }
+    .chat-panel.fullwidth .login-card { padding: 14px; }
+    .chat-panel.fullwidth .chat-input { flex-direction: row; }
+}
+
+/* New conversation bubble and avatar styles (user-side redesign) */
+.conversation-header h4{font-weight:600}
+.session-badge{font-size:12px}
+.conversation-messages{display:flex;flex-direction:column;gap:10px}
+.message-wrapper{display:flex;gap:10px;align-items:flex-end}
+.message-wrapper .avatar{width:40px;height:40px;border-radius:8px;background:var(--accent-color);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.message-content{max-width:75%;display:flex;flex-direction:column}
+.message-bubble{padding:10px 12px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,0.04);box-shadow:0 1px 0 rgba(0,0,0,0.02);font-size:14px;color:var(--text-primary)}
+.from-user .message-bubble{background:linear-gradient(90deg,var(--accent-color),var(--accent-hover));color:#fff;border:none}
+.from-tech .message-bubble{background:#f5f7fb;color:#111}
+.message-meta{font-size:11px;color:var(--text-secondary);margin-top:6px}
+.from-user{justify-content:flex-end}
+.from-user .avatar{order:2}
+.from-user .message-content{order:1;align-items:flex-end}
+.from-tech .avatar{order:1}
+.from-tech .message-content{order:2;align-items:flex-start}
+.chat-input{display:flex;gap:8px;align-items:flex-end}
+.chat-input textarea.form-control{resize:none;min-height:44px;max-height:120px;border-radius:10px;padding:10px}
+.chat-input .login-btn{min-width:88px;padding:10px 14px;border-radius:10px}
+
+@media (max-width:768px){
+    .message-content{max-width:78%}
+    .avatar{width:36px;height:36px}
+}
+
+/* Modal contrast fixes: ensure labels and inputs inside white modals are dark and readable */
+.modal-content.bg-white .form-label,
+.modal-content.bg-white label {
+    color: #0b1220 !important;
+}
+.modal-content.bg-white .form-control {
+    background: #ffffff !important;
+    color: #0b1220 !important;
+    border: 1px solid #e6e6e6 !important;
+}
+.modal-content.bg-white .form-control::placeholder {
+    color: rgba(11,18,32,0.45) !important;
+}
+
+/* Ensure dark modals keep dark inputs and readable text on focus */
+.modal-content.bg-dark .form-control {
+    background-color: rgba(2,6,23,0.72) !important;
+    color: var(--text-color) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+.modal-content.bg-dark .form-control::placeholder {
+    color: rgba(255,255,255,0.55) !important;
+}
+.modal-content.bg-dark .form-control:focus {
+    background-color: rgba(2,6,23,0.72) !important;
+    color: var(--text-color) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 6px 18px rgba(28,77,161,0.06) !important;
+    outline: none !important;
+}
+
+/* Bulk edit modal row styling: cleaner, more compact rows for labels and links */
+#bulkTable {
+    border-collapse: separate;
+}
+#bulkTable thead th { color: rgba(255,255,255,0.75); font-weight:600; border-bottom: 1px solid rgba(255,255,255,0.04); }
+#bulkTable tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); }
+#bulkTable tbody tr td { vertical-align: middle; padding: 10px 6px; }
+#bulkTable tbody tr td:first-child { width: 48px; text-align: center; }
+#bulkTable tbody tr td:last-child { width: 48px; text-align: center; }
+#bulkTable .badge { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.04); color: var(--text-color); font-weight:600; }
+#bulkTable .form-control {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    color: var(--text-color) !important;
+    border-radius: 8px;
+    padding: 8px 10px;
+    height: 38px;
+}
+#bulkTable .form-control:focus {
+    box-shadow: 0 6px 18px rgba(28,77,161,0.06) !important;
+    border-color: var(--accent-color) !important;
+}
+#bulkTable .row-delete {
+    min-width: 36px; padding: 6px 8px; border-radius: 8px; display:inline-flex; align-items:center; justify-content:center;
+}
+#bulkTable .row-delete svg { width: 14px; height: 14px; }
+.modal-content.bg-dark .table-borderless td, .modal-content.bg-dark .table-borderless th { border: none; }
+.modal-content.bg-dark .table { margin-bottom: 0; }
+
+/* Flex-based bulk list rows (replaces table layout) */
+.bulk-list { display:flex; flex-direction:column; gap:8px; }
+.bulk-row { display:flex; gap:12px; align-items:center; }
+.bulk-row .badge { width:34px; height:34px; display:inline-grid; place-items:center; border-radius:50%; background: rgba(255,255,255,0.04); color:var(--text-color); font-weight:600; }
+.bulk-row .form-control { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.06) !important; color: var(--text-color) !important; border-radius: 8px; padding: 8px 10px; height: 38px; }
+.bulk-row .row-delete { min-width:36px; padding:6px 8px; border-radius:8px; }
+.modal-content.bg-dark .bulk-list { margin-top: 6px; }
+
+/* Ensure Add Row / outline-light buttons remain readable inside dark bulk modal */
+.modal-content.bg-dark .btn-outline-light,
+#addBulkRowBtn {
+    background: transparent !important;
+    color: var(--text-color) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+.modal-content.bg-dark .btn-outline-light:hover,
+#addBulkRowBtn:hover {
+    background: rgba(255,255,255,0.03) !important;
+    color: var(--text-color) !important;
+}
+.modal-content.bg-dark .btn-outline-light:focus,
+.modal-content.bg-dark .btn-outline-light:active,
+#addBulkRowBtn:focus,
+#addBulkRowBtn:active {
+    background: rgba(255,255,255,0.05) !important;
+    color: var(--text-color) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Inventory/Documents item button layout and size improvements */
+#inventory-items, #documents-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    align-items: start;
+}
+
+/* btn-group should be inline-flex so the toggle stays attached to the main button */
+/* Make the btn-group act as a single connected control */
+#inventory-items .btn-group, #documents-items .btn-group {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    overflow: visible; /* allow dropdown menu to extend outside */
+    border-radius: 8px; /* rounded container */
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.01);
+    position: relative; /* positioning context for absolute children */
+}
+
+#inventory-items .open-item, #documents-items .open-item {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .5rem .75rem;
+    font-size: 0.95rem;
+    flex: 1 1 auto;
+    border-radius: 0; /* container handles rounding */
+    border-right: none !important; /* remove double border */
+    background: transparent !important;
+}
+
+/* Hover and focus styles for item buttons */
+#inventory-items .open-item:hover, #documents-items .open-item:hover,
+#inventory-items .open-item:focus, #documents-items .open-item:focus {
+    background: rgba(28,77,161,0.12) !important;
+    color: var(--text-color) !important;
+    transform: translateY(-1px);
+}
+
+#inventory-items .open-item, #documents-items .open-item {
+    transition: background 150ms ease, transform 120ms ease, color 150ms ease;
+}
+
+#inventory-items .dropdown-toggle, #documents-items .dropdown-toggle {
+    padding: .45rem .6rem;
+    flex: 0 0 auto;
+    border-radius: 0; /* container handles rounding */
+    border-left: none !important; /* remove double border */
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+}
+
+/* Ensure buttons inside the group have no internal margins that create gaps */
+.btn-group > .btn, .btn-group > .dropdown-toggle { margin: 0 !important; }
+
+/* Remove internal borders so container border defines the control */
+.btn-group > .btn, .btn-group > .dropdown-toggle {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* Dropdown menu appearance and stacking */
+.btn-group .dropdown-menu {
+    z-index: 1200;
+    background: var(--secondary-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.btn-group .dropdown-menu .dropdown-item {
+    color: var(--text-color) !important;
+}
+
+/* Ensure dropdown items are readable on hover in dark theme */
+.btn-group .dropdown-menu .dropdown-item:hover,
+.btn-group .dropdown-menu .dropdown-item:focus,
+.btn-group .dropdown-menu .dropdown-item:active {
+    background: rgba(255,255,255,0.04) !important;
+    color: var(--text-color) !important;
+}
+
+/* Slightly stronger hover for better contrast when needed */
+.btn-group .dropdown-menu .dropdown-item:hover { background: rgba(28,77,161,0.12) !important; }
+
+/* When the group is collapsed to small widths, avoid wrap */
+.btn-group { white-space: nowrap; }
+
+#inventory-items .btn-group, #documents-items .btn-group {
+    display: flex;
+    gap: 0;
+    align-items: center;
+}
+
+#inventory-items .btn, #documents-items .btn {
+    border-radius: 8px;
+}
+
+@media (max-width: 576px) {
+    #inventory-items, #documents-items { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    #inventory-items .open-item, #documents-items .open-item { font-size: 0.9rem; }
+}
+
+/* Dashboard GTI charts: fixed container height to prevent layout growth on updates */
+#gti-charts { align-items: flex-start; }
+#gti-charts > div { height: 100px; display:flex; flex-direction:column; }
+#gti-charts canvas { height: 80px !important; max-height: 80px !important; }
+

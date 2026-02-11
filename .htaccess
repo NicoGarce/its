@@ -1,0 +1,38 @@
+# Disable directory listing
+Options -Indexes
+
+# Block direct access to the scripts folder
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^scripts/ - [F,L]
+</IfModule>
+
+# Deny access to sensitive files by pattern (optional)
+<FilesMatch "^(show_users_columns\.php)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_rewrite.c>
+    # Enable rewrite engine
+    RewriteEngine On
+
+    # Redirect direct requests for *.php to extensionless canonical URL
+    # Example: GET /tech_chat.php -> redirect 301 to /tech_chat
+    # Exclude API endpoints to avoid converting POST API calls into GETs via redirects
+    # Match /api/ anywhere in the request path (site may be hosted in a subdirectory)
+    RewriteCond %{REQUEST_URI} !/api/ [NC]
+    RewriteCond %{THE_REQUEST} \s/([^\s]+?)\.php[?\s] [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
+    # If the request matches an existing file or directory, serve it as-is
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Internally rewrite extensionless requests to corresponding .php files
+    # Example: /tech_chat -> /tech_chat.php (internal rewrite)
+    RewriteRule ^([A-Za-z0-9_\-/]+?)/?$ $1.php [L]
+
+</IfModule>
+
+# Helpful defaults — prevent directory listings
+Options -Indexes

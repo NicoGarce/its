@@ -1,0 +1,25 @@
+-- Chat sessions table for ITS support
+CREATE TABLE IF NOT EXISTS `chat_sessions` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `session_id` VARCHAR(64) NOT NULL,
+  `name` VARCHAR(200) DEFAULT NULL,
+  `identifier_type` VARCHAR(50) DEFAULT NULL,
+  `identifier` VARCHAR(200) DEFAULT NULL,
+  `location` VARCHAR(200) DEFAULT NULL,
+  `issue` TEXT,
+  `contact` VARCHAR(200) DEFAULT NULL,
+  `auth_user` JSON DEFAULT NULL,
+  `flagged` TINYINT(1) DEFAULT 0,
+  `flagged_reason` VARCHAR(500) DEFAULT NULL,
+  `client_ip` VARCHAR(45) DEFAULT NULL,
+  `user_agent` VARCHAR(512) DEFAULT NULL,
+  `received_at` DATETIME DEFAULT NULL,
+  `status` VARCHAR(50) DEFAULT 'open',
+  `ended` TINYINT(1) DEFAULT 0,
+  `ended_at` DATETIME DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_session_id` (`session_id`),
+  KEY `idx_received_at` (`received_at`),
+  KEY `idx_client_ip` (`client_ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
