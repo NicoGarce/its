@@ -21,7 +21,11 @@ $APP_BASE = ($envBase === false) ? null : trim($envBase);
 if ($APP_BASE === null || $APP_BASE === '') {
     // Heuristic: on localhost, app likely sits in /its/ locally; on production default to '/'
     $host = $_SERVER['HTTP_HOST'] ?? '';
-    if (stripos($host, 'localhost') !== false || stripos($host, '127.0.0.1') !== false) {
+    // Treat localhost, 127.0.0.1 and common local LAN addresses as development installs
+    if (stripos($host, 'localhost') !== false
+        || stripos($host, '127.0.0.1') !== false
+        || (isset($_SERVER['SERVER_ADDR']) && preg_match('/^192\\.168\\./', $_SERVER['SERVER_ADDR']))
+    ) {
         $APP_BASE = '/its/';
     } else {
         $APP_BASE = '/';

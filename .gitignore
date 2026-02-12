@@ -25,3 +25,5 @@ yarn-error.log*
 
 # Ignore local DB config (may contain credentials)
 includes/db.php
+data/health_history.json
+data/health_state.json
