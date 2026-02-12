@@ -91,12 +91,22 @@ function _statusBadge(array $res) {
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" href="assets/img/its_logo.png">
     <link rel="apple-touch-icon" href="assets/img/its_logo.png">
+    <style>
+        /* Reuse modern table styles from accounts page (muted palette) */
+        :root{--acct-text:#cfd8e3;--muted:#9aa4b2;--row-bg:rgba(255,255,255,0.02);--row-hover:rgba(255,255,255,0.03);--primary-50:rgba(59,130,246,0.07);--primary-200:rgba(59,130,246,0.18)}
+        .table-modern{width:100%;border-collapse:separate;border-spacing:0 10px}
+        .table-modern thead th{background:transparent;color:var(--muted);font-weight:600;border-bottom:0;padding:12px 14px;text-align:left}
+        .table-modern tbody tr{background:var(--row-bg);border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,0.12);transition:transform .12s ease,box-shadow .12s ease}
+        .table-modern tbody tr td{border:0;padding:14px;vertical-align:middle;color:var(--acct-text)}
+        .table-modern tbody tr:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,0.25);background:var(--row-hover)}
+        @media (max-width:700px){ .table-modern thead th{display:none} .table-modern tbody tr td{display:block;padding:10px} }
+    </style>
     <!-- Chart.js removed: using a lightweight live-check status display instead -->
 </head>
 <body>
     <?php include 'sidebar.php'; ?>
     <div class="main-content">
-        <div class="container-fluid">
+        <div class="container-fluid dashboard-compact">
             <header class="page-header">
                 <div>
                     <h1 class="page-title">RTO Monitoring Dashboard</h1>
@@ -113,7 +123,7 @@ function _statusBadge(array $res) {
                         <div class="card-body">
                             <h5 class="card-title">GTI Status</h5>
                             <div class="table-responsive">
-                                <table class="table table-dark table-hover">
+                                <table class="table-modern">
                                 <thead>
                                     <tr>
                                         <th>Component</th>
@@ -138,7 +148,6 @@ function _statusBadge(array $res) {
                                 </tbody>
                                 </table>
                             </div>
-                            <!-- Charts moved to their own cards below -->
                         </div>
                     </div>
                 </div>

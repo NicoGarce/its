@@ -1,3 +1,13 @@
+.dashboard-compact .page-header { margin-bottom: 12px; }
+.dashboard-compact .row.mt-4 { margin-top: 12px; }
+.dashboard-compact .row.mt-3 { margin-top: 8px; }
+.dashboard-compact .card { margin-bottom: 8px; }
+.dashboard-compact .card.metric-card .card-body,
+.dashboard-compact .card .card-body { padding: 10px 12px; }
+.dashboard-compact .card .card-title { margin-bottom: 8px; font-size: 15px; }
+.dashboard-compact .dashboard-compact .table-modern tbody tr td { padding: 6px; }
+.dashboard-compact .col-md-6, .dashboard-compact .col-md-12 { padding-left: 8px; padding-right: 8px; }
+
 /* assets/css/style.css - Main stylesheet */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -798,6 +808,42 @@ body.no-scroll { height: 100vh; overflow: hidden; }
     table.table, .table { font-size: 12px; }
     .sidebar .sidebar-link .label { font-size: 13px; }
 }
+
+/* Compact modern table styles (used by accounts and dashboard) */
+.table-modern{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 6px;
+}
+.table-modern thead th{
+    background:transparent;
+    color:var(--text-secondary);
+    font-weight:600;
+    border-bottom:0;
+    padding:8px 10px;
+    text-align:left;
+    font-size:13px;
+}
+.table-modern tbody tr{
+    background: rgba(255,255,255,0.02);
+    border-radius:8px;
+    box-shadow:0 1px 0 rgba(0,0,0,0.18);
+    transition:transform .08s ease,box-shadow .12s ease;
+}
+.table-modern tbody tr td{
+    border:0;
+    padding:8px;
+    vertical-align:middle;
+    color:var(--text-color);
+    font-size:14px;
+}
+.table-modern tbody tr:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.35);
+    background: rgba(255,255,255,0.03);
+}
+.table-modern .btn-icon{ width:30px; height:30px; padding:0; border-radius:6px; display:inline-flex; align-items:center; justify-content:center }
+
 
 /* Button size refinements for mobile: reduce padding, set min-height and smaller svg icons */
 @media (max-width: 768px) {
