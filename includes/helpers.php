@@ -2,12 +2,6 @@
 // includes/helpers.php - Reusable helper functions
 require_once __DIR__ . '/db.php';
 
-// Instruct crawlers not to index any pages from this application.
-// Uses HTTP header so APIs and non-HTML responses are also covered.
-if (php_sapi_name() !== 'cli' && !headers_sent()) {
-    header('X-Robots-Tag: noindex, nofollow', true);
-}
-
 function sanitizeInput($data) {
     return htmlspecialchars(strip_tags(trim($data)));
 }
@@ -101,6 +95,11 @@ function checkHttpEndpoint(string $url, int $timeout = 3): array {
     $response = '';
     while (!feof($fp)) {
         $response .= fgets($fp, 128);
+    // Instruct crawlers not to index any pages from this application.
+    // Uses HTTP header so APIs and non-HTML responses are also covered.
+    if (php_sapi_name() !== 'cli' && !headers_sent()) {
+        header('X-Robots-Tag: noindex, nofollow', true);
+    }
     }
     fclose($fp);
     if (preg_match('#HTTP/\d+\.\d+\s+(\d+)#', $response, $m)) {
