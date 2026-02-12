@@ -30,7 +30,7 @@ if (is_readable(__DIR__ . '/includes/db.php')){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITS Technician Chat</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" href="assets/img/its_logo.png">
